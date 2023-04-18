@@ -1,6 +1,7 @@
 
 import scrapy
 import re
+import time
 
 class BooksSpider(scrapy.Spider):
     name = 'booksspider'
@@ -74,14 +75,9 @@ class BooksSpider(scrapy.Spider):
         pager = response.css('ul.pager')
         next_page_button_li = pager.css('li.next')
         next_page_link = next_page_button_li.css('a::attr(href)').get()
+        next_page = f'http://books.toscrape.com/{next_page_link}'
 
-        def remove_catalogue(string):
-            regex = re.compile(r'^/catalogue/(.*)$')
-            result = regex.sub(r'\1', string)
-            return result
+        time.sleep(10)
 
-        sanitized_next_page_link = remove_catalogue(next_page_link)
-
-        next_page = f'http://books.toscrape.com/catalogue/{sanitized_next_page_link}'
         if next_page is not None:
             yield response.follow(next_page, callback = self.parse)
