@@ -13,12 +13,12 @@ class BooksSpider(scrapy.Spider):
         main_items_section = items.css('section')
         items = main_items_section.css('ol.row')
         
-        for item in items:
-            container = items.css('li.col-xs-6.col-sm-4.col-md-3.col-lg-3')
+        for item in main_items_section.css('ol.row'):
+            container = item.css('li.col-xs-6.col-sm-4.col-md-3.col-lg-3')
             inner_container = container.css('article.product_pod')
 
             price_container = inner_container.css('div.product_price')
-            price = price_container.css('p.price_color::text').get()
+            price = price_container.css('p.price_color::text').get().replace('£', '')
 
             yield {
                 'price' : price
