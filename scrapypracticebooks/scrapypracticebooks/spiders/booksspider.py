@@ -8,7 +8,7 @@ class BooksSpider(scrapy.Spider):
 
     def parse(self, response):
 
-        # these get into the data and pass the container where the loop will start as the items
+        # these get into the data and pass the container where the loop will start as 'items'
         items = response.css('div.col-sm-8.col-md-9')
         header = items.css('div.page-header.action')
         header.css('h1::text').get()
@@ -43,7 +43,7 @@ class BooksSpider(scrapy.Spider):
             if match:
                 monetary_unit = match.group(1)
 
-            # regex that looks at the star-rating and retunrs onlt the number
+            # regex that looks at the star-rating and returns only the number
             def extract_rating(string):
                 pattern = r'^star-rating\s+(\w+)$'
                 match = re.match(pattern, string)

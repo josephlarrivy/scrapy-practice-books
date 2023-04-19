@@ -8,10 +8,6 @@ class JsonParser:
     def get_json_file(self):
         with open(self.filepath, 'r') as read_file:
             self.data = json.load(read_file)
-
-    def convert_to_float(self, string_number):
-        self.integer_number = float(string_number)
-        return self.integer_number
     
     def average_prices(self):
         total = 0
