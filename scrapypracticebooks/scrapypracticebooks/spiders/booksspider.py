@@ -28,7 +28,8 @@ class BooksSpider(scrapy.Spider):
 
             # gets the price and removes the monetary unit
             price_container = inner_container.css('div.product_price')
-            price = price_container.css('p.price_color::text').get().replace('£', '')
+            price_string = price_container.css('p.price_color::text').get().replace('£', '')
+            price = float(price_string)
 
             # gets the monetary unit only from price
             string = price_container.css('p.price_color::text').get()

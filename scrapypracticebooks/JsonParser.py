@@ -17,8 +17,8 @@ class JsonParser:
         total = 0
         num_items = 0
         for item in self.data:
-            price_float = self.convert_to_float(item['price'])
-            total += price_float
+            price = item['price']
+            total += price
             num_items += 1
         average_price = round(total / num_items, 2)
         monetary_unit = self.data[0]["monetary_unit"]
