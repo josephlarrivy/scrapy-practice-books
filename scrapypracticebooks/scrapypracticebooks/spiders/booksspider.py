@@ -65,13 +65,15 @@ class BooksSpider(scrapy.Spider):
             # passes star rating from data through both functions and returns an integer
             star_rating_number = convert_string_to_number(extract_rating(star_rating))
 
+
             # yeild from this class
             yield {
                 'price': price,
                 'monetary_unit' : monetary_unit,
                 'star_rating' : star_rating_number,
                 'title' : title,
-                'link' : href
+                'link' : href,
+                'website' : 'books.toscrape.com'
             }
 
         # finds the link to the next page and uses it to go there
