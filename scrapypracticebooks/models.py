@@ -9,6 +9,9 @@ class Book_Title(db.Model):
     def insert_title_into_database(title):
         return cls(title=title)
     
+    @classmethod
+    def get_price_data(cls, title):
+        return Prices.query.filter_by(title=title).all()
 
 
 
