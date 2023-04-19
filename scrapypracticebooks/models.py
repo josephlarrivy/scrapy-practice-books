@@ -1,17 +1,3 @@
-from flask_sqlalchemy import SQLAlchemy
-import os
-import random
-import string
-import psycopg2
-
-
-db = SQLAlchemy()
-
-def connect_db(app):
-    db.app = app
-    db.init_app(app)
-
-random_string = ''.join(random.choices(string.ascii_letters + string.digits, k=20))
 
 
 class Book_Title(db.Model): 
@@ -23,6 +9,8 @@ class Book_Title(db.Model):
     def insert_title_into_database(title):
         return cls(title=title)
     
+
+
 
 class Prices(db.Model):
     __tablename__ = 'prices'
@@ -36,20 +24,6 @@ class Prices(db.Model):
     website = db.Column(db.Text, nullable=False)
 
     @classmethod
-    def create_new_list(cls, item_id, title, price, monetary_unit, start_rating, link, website):
-        return cls(item_id=random_string, title=title, price=price, monetary_unit=monetary_unit, start_rating=start_rating, link=link, website=website)
+    def create_new_list(cls, item_id, title, price, monetary_unit, star_rating, link, website):
+        return cls(item_id=random_string, title=title, price=price, monetary_unit=monetary_unit, star_rating=star_rating, link=link, website=website)
 
-
-
-conn = psycopg2.connect(
-   database="scrapy_data"
-)
-
-cur = conn.cursor()
-cur.execute("INSERT INTO book_titles VALUES ('test_book');")
-cur.execute("INSERT INTO prices VALUES ('xxx', 'test_book', '1.00', '$', '5', 'www.xxx.com', 'www.yyy.com');")
-
-
-
-conn.commit()
-conn.close()
