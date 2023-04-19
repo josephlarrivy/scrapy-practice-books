@@ -21,9 +21,9 @@ class BooksSpider(scrapy.Spider):
             # gets the title text
             title_container_h3 = inner_container.css('h3')
             title = title_container_h3.css('a::text').get()
-            anchor = title_container_h3.css('a')
 
             # gets the link from the anchor tag
+            anchor = title_container_h3.css('a')
             href = anchor.css('a::attr(href)').get()
 
             # gets the price and removes the monetary unit

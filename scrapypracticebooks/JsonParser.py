@@ -28,8 +28,8 @@ class JsonParser:
         total = 0
         num_items = 0
         for item in self.data:
-            stars_float = self.convert_to_float(item["star_rating"])
-            total += stars_float
+            stars = item["star_rating"]
+            total += stars
             num_items += 1
         average_stars = round(total / num_items, 2)
         print('Average star rating:', average_stars)
